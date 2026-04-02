@@ -1,6 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+
+    ],
+
+    
+
+  },
+  allowedDevOrigins: ["192.168.31.75"],
 };
 
 export default nextConfig;
