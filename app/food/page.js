@@ -5,8 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Loader2, ShoppingBag, Star, Clock, Plus } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function FoodMenu() {
+  const router = useRouter();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,6 +36,39 @@ export default function FoodMenu() {
     
     fetchProducts();
   }, []);
+
+  const handleAddToCart = async (e, productId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Please login to add items to cart");
+      router.push(`/login?redirect=${window.location.pathname}`);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId, quantity: 1 }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Added to cart!");
+        // Refresh Navbar cart count
+        window.dispatchEvent(new Event("auth-change"));
+      } else {
+        toast.error(data.message || "Failed to add to cart");
+        if (data.message.toLowerCase().includes("unauthorized")) {
+           router.push(`/login?redirect=${window.location.pathname}`);
+        }
+      }
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+  };
 
   // Derived state for categories
   const categories = ["All", ...new Set(products.map((p) => p.category).filter(Boolean))];
@@ -102,8 +138,11 @@ export default function FoodMenu() {
                   />
                   
                   {/* Glassmorphism Quick-Action */}
-                  <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                    <div className="bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md p-2 sm:p-3.5 rounded-xl sm:rounded-2xl shadow-2xl text-zinc-900 dark:text-white">
+                  <div 
+                    onClick={(e) => handleAddToCart(e, product._id)}
+                    className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 cursor-pointer z-10"
+                  >
+                    <div className="bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md p-2 sm:p-3.5 rounded-xl sm:rounded-2xl shadow-2xl text-zinc-900 dark:text-white hover:bg-amber-500 hover:text-white transition-colors">
                       <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                   </div>

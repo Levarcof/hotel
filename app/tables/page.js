@@ -71,7 +71,7 @@ export default function RestaurantTableLayout() {
   const handleBooking = () => {
     if (!token) {
       toast.error("Please login to book seats.");
-      router.push("/login?redirect=/tables");
+      router.push(`/login?redirect=${window.location.pathname}`);
       return;
     }
     if (selectedSeatIds.length === 0 || !date || !time) {

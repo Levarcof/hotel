@@ -59,7 +59,8 @@ export async function POST(req) {
     // 🍪 Store in cookie
     const response = NextResponse.json({
       success: true,
-      message: "Login successful",
+      message: "Registration successful",
+      token: token
     });
 
     response.cookies.set("token", token, {

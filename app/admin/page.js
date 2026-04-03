@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Hotel, Package, Utensils, IndianRupee, Calendar, Users, Activity, ChevronRight, TrendingUp } from "lucide-react";
+import { Hotel, Package, Utensils, IndianRupee, Calendar, Users, Activity, ChevronRight, TrendingUp, Zap, Grid } from "lucide-react";
 import Link from "next/link";
 
 export default function AdminDashboard() {
@@ -11,7 +11,9 @@ export default function AdminDashboard() {
     products: 0,
     bookings: 0,
     tables: 0,
-    users: 0
+    users: 0,
+    rooms: 0,
+    roomBookings: 0
   });
 
   // HYDRATION FIX: Time state banayein
@@ -45,10 +47,12 @@ export default function AdminDashboard() {
   const quickStats = [
     { title: "Revenue", value: `₹${stats.revenue.toLocaleString()}`, label: "Net Earnings", icon: IndianRupee, color: "text-emerald-500", route: "/admin/orders" },
     { title: "Orders", value: stats.orders, label: "Total Sales", icon: Package, color: "text-blue-500", route: "/admin/orders" },
-    { title: "Menu", value: stats.products, label: "Live Dishes", icon: Utensils, color: "text-amber-500", route: "/admin/products" },
-    { title: "Bookings", value: stats.bookings, label: "Reservations", icon: Calendar, color: "text-rose-500", route: "/admin/bookings" },
-    { title: "Tables", value: stats.tables, label: "Floor Units", icon: Hotel, color: "text-indigo-500", route: "/admin/tables" },
-    { title: "Members", value: stats.users, label: "Active Users", icon: Users, color: "text-cyan-500", route: "/admin" }
+    { title: "Food Items", value: stats.products, label: "Kitchen Asset", icon: Utensils, color: "text-orange-500", route: "/admin/add-product" },
+    { title: "Rooms", value: stats.rooms, label: "Total Assets", icon: Hotel, color: "text-amber-500", route: "/admin/rooms" },
+    { title: "Tables", value: stats.tables, label: "Dining Assets", icon: Grid, color: "text-indigo-500", route: "/admin/tables" },
+    { title: "Residencies", value: stats.roomBookings, label: "Room Bookings", icon: Zap, color: "text-purple-500", route: "/admin/rooms/bookings" },
+    { title: "Reservations", value: stats.bookings, label: "Table Bookings", icon: Calendar, color: "text-rose-500", route: "/admin/bookings" },
+    { title: "Members", value: stats.users, label: "Active Users", icon: Users, color: "text-cyan-500", route: "/admin/users" }
   ];
 
   return (
@@ -68,7 +72,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* --- STATS GRID --- */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 md:gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {quickStats.map((stat, idx) => (
           <Link 
             href={stat.route} 

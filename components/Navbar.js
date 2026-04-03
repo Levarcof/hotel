@@ -6,8 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Menu, X, ShoppingCart, Home,
-  Utensils, ClipboardList, Info,
-  User, LogOut, ChevronRight, Calendar, MapPin
+  Utensils, ClipboardList, Info, Hotel,
+  User, LogOut, ChevronRight, Calendar, MapPin, Zap
 } from "lucide-react";
 
 // --- Sub-Components ---
@@ -69,15 +69,15 @@ const MobileSidebar = ({ isOpen, onClose, navLinks, token, isAdmin, handleLogout
       <div className="flex flex-col px-6 pt-10 pb-8 bg-zinc-50 dark:bg-zinc-900/50 border-b border-zinc-100 dark:border-zinc-800/50">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 bg-zinc-900 dark:bg-white rounded-xl flex items-center justify-center shadow-lg overflow-hidden border border-zinc-100 dark:border-zinc-800">
-              <Image
-                src="/log.png"
-                alt="Logo"
-                width={32}
-                height={32}
-                className="w-7 h-7 object-contain"
-              />
-            </div>
+               <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg overflow-hidden ">
+                  <Image
+                    src="/log.png"
+                    alt="Logo"
+                    width={46}
+                    height={46}
+                    className="w-10 h-10 object-contain"
+                  />
+                </div>
             <div className="flex flex-col -space-y-1">
               <h1 className="text-xl font-black text-zinc-900 dark:text-white uppercase font-serif tracking-tighter">Luxe</h1>
             </div>
@@ -95,8 +95,7 @@ const MobileSidebar = ({ isOpen, onClose, navLinks, token, isAdmin, handleLogout
             </div>
           ) : (
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white tracking-tight leading-tight">Gourmet Food, <br />Delivered Fast.</h2>
-              <Link href="/login" onClick={onClose} className="mt-5 inline-flex items-center justify-center px-8 py-3 bg-amber-500 text-white rounded-full font-bold text-sm shadow-xl shadow-amber-500/20 active:scale-95 transition-all">
+              <Link href="/login" onClick={onClose} className="inline-flex items-center justify-center px-8 py-3 bg-amber-500 text-white rounded-full font-bold text-sm shadow-xl shadow-amber-500/20 active:scale-95 transition-all">
                 Sign In / Register
               </Link>
             </div>
@@ -246,8 +245,10 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/", icon: Home },
     { name: "Menu", href: "/food", icon: Utensils },
+    { name: "Room", href: "/rooms", icon: Hotel },
     { name: "Tables", href: "/tables", icon: MapPin },
     { name: "My Bookings", href: "/my-table-bookings", icon: Calendar },
+    { name: "My Room", href: "/my-room", icon: Zap },
     { name: "Orders", href: "/orders", icon: ClipboardList },
   ];
 
@@ -258,26 +259,21 @@ export default function Navbar() {
           <div className="flex items-center justify-between w-full">
 
             <div className="flex-shrink-0">
-              <Link href="/" className="flex items-center gap-3.5 active:scale-95 transition-transform group">
-                <div className="relative w-10 h-10 md:w-11 md:h-11 flex items-center justify-center bg-zinc-900 dark:bg-white rounded-xl shadow-xl group-hover:shadow-amber-500/20 group-hover:rotate-6 transition-all duration-300 overflow-hidden border border-zinc-200/5 dark:border-zinc-800">
-                  {/* Visual Accent */}
-                  <div className="absolute top-0 right-0 w-4 h-4 bg-amber-500/20 -mr-2 -mt-2 rounded-full" />
+              <Link href="/" className="flex items-center active:scale-95 transition-transform group">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg overflow-hidden ">
                   <Image
                     src="/log.png"
                     alt="Logo"
-                    width={40}
-                    height={40}
-                    className="w-7 h-7 object-contain brightness-0 invert dark:invert-0"
-                    priority
+                    width={46}
+                    height={46}
+                    className="w-10 h-10 object-contain"
                   />
                 </div>
                 <div className="flex flex-col -space-y-1.5">
                   <span className="text-xl md:text-2xl font-black tracking-tight text-zinc-950 dark:text-white uppercase font-serif">
-                    Luxe<span className="text-amber-500 font-sans">.</span>
+                    Luxe
                   </span>
-                  <span className="text-[8px] md:text-[9px] font-black tracking-[0.4em] text-zinc-400 dark:text-zinc-500 uppercase">
-                    Gourmet Kitchen
-                  </span>
+
                 </div>
               </Link>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { 
@@ -14,6 +14,7 @@ import { toast } from "react-hot-toast";
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const isAdmin = searchParams.get("admin") === "true";
 
@@ -79,7 +80,9 @@ export default function ProductDetails() {
         setTimeout(() => setAdded(false), 2000);
       } else {
         toast.error(data.message || "Please login first");
-        if(data.message.toLowerCase().includes("unauthorized")) window.location.href = "/login";
+        if (data.message.toLowerCase().includes("unauthorized") || data.message.toLowerCase().includes("please login")) {
+          router.push(`/login?redirect=${window.location.pathname}`);
+        }
       }
     } catch (err) {
       toast.error("Something went wrong");
@@ -199,7 +202,15 @@ export default function ProductDetails() {
               </div>
               <button 
                 disabled={product.stock === 0}
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => {
+                  const token = localStorage.getItem("token");
+                  if (!token) {
+                    toast.error("Please login to proceed with purchase");
+                    router.push(`/login?redirect=${window.location.pathname}`);
+                    return;
+                  }
+                  setIsModalOpen(true);
+                }}
                 className="w-full h-14 bg-amber-500 text-white rounded-xl font-black uppercase text-xs tracking-[0.2em] shadow-lg shadow-amber-500/30 hover:scale-[1.01] active:scale-[0.98] transition-all disabled:opacity-50"
               >
                 Buy Now • ₹{product.price * quantity}

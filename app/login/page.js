@@ -38,8 +38,10 @@ export default function LoginPage() {
       // Trigger a custom event so Navbar can update immediately
       window.dispatchEvent(new Event("auth-change"));
 
-      // Route back to home
-      router.push("/");
+      // Route back to intended page or home
+      const searchParams = new URLSearchParams(window.location.search);
+      const redirectTo = searchParams.get("redirect") || "/";
+      router.push(redirectTo);
     } catch (err) {
       setError(err.message);
     } finally {

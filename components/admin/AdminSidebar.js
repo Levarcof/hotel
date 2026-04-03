@@ -9,14 +9,13 @@ import {
   PlusCircle,
   Menu, 
   X, 
-  ChevronRight,
   Hotel,
   Utensils,
-  Settings,
   Calendar,
   Grid,
   Users,
-  LogOut
+  LogOut,
+  Zap // Zap ko import karna zaroori tha
 } from "lucide-react";
 
 export default function AdminSidebar({ children }) {
@@ -28,14 +27,17 @@ export default function AdminSidebar({ children }) {
      setIsSidebarOpen(false);
   }, [pathname]);
 
+  // FIX: navItems ko variable (const) mein assign kiya gaya hai
   const navItems = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, href: "/admin" },
-    { id: "bookings", label: "Bookings", icon: Calendar, href: "/admin/bookings" },
+    { id: "bookings", label: "Table Bookings", icon: Calendar, href: "/admin/bookings" },
     { id: "tables", label: "Tables", icon: Grid, href: "/admin/tables" },
+    { id: "rooms", label: "Rooms", icon: Hotel, href: "/admin/rooms" },
+    { id: "room-bookings", label: "Room Bookings", icon: Zap, href: "/admin/rooms/bookings" },
     { id: "orders", label: "Orders", icon: Package, href: "/admin/orders" },
-    { id: "products", label: "Products", icon: Utensils, href: "/admin/products" },
+    { id: "products", label: "Food Items", icon: Utensils, href: "/admin/products" },
     { id: "users", label: "Users", icon: Users, href: "/admin/users" },
-    { id: "add-product", label: "Add Product", icon: PlusCircle, href: "/admin/add-product" },
+    { id: "add-product", label: "Add Food", icon: PlusCircle, href: "/admin/add-product" },
   ];
 
   return (
@@ -103,10 +105,10 @@ export default function AdminSidebar({ children }) {
         </div>
       </aside>
 
-      {/* Fluid Main Content Engine */}
+      {/* Main Content Area */}
       <div className="flex-1 flex flex-col h-screen min-w-0 bg-[#F8F9FA] dark:bg-black transition-all">
         
-        {/* Mobile Navbar App Header */}
+        {/* Mobile Header */}
         <div className="lg:hidden h-20 px-4 sm:px-6 flex items-center justify-between bg-white dark:bg-[#1C1C1E] border-b border-zinc-200 dark:border-zinc-800 z-30 flex-shrink-0 shadow-sm">
           <div className="flex items-center gap-4">
             <button 
@@ -119,7 +121,7 @@ export default function AdminSidebar({ children }) {
           </div>
         </div>
 
-        {/* Scrollable Layout Injector */}
+        {/* Main Content */}
         <main className="flex-1 overflow-x-hidden overflow-y-auto">
           <div className="p-4 sm:p-6 lg:p-10 mx-auto w-full max-w-7xl relative min-h-full">
              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -127,7 +129,6 @@ export default function AdminSidebar({ children }) {
              </div>
           </div>
         </main>
-
       </div>
     </div>
   );

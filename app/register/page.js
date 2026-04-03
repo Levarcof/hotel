@@ -86,7 +86,14 @@ export default function RegisterPage() {
         throw new Error(data.message || "Registration failed");
       }
 
-      // Redirect to login on success
+      // Seamless Auto-Login
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        // Trigger a custom event so Navbar can update immediately
+        window.dispatchEvent(new Event("auth-change"));
+      }
+
+      // Redirect to home on success
       router.push("/");
     } catch (err) {
       setStatus({ loading: false, error: err.message, currentAction: "" });

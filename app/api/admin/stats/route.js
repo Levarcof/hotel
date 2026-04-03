@@ -5,18 +5,30 @@ import Product from "@/app/models/Product";
 import Booking from "@/app/models/Booking";
 import Table from "@/app/models/Table";
 import User from "@/app/models/User";
+import Room from "@/app/models/Room";
+import RoomBooking from "@/app/models/RoomBooking";
 
 export async function GET() {
   try {
     await connectDB();
 
     // Fetch counts in parallel
-    const [ordersCount, productsCount, bookingsCount, tablesCount, usersCount] = await Promise.all([
+    const [
+      ordersCount, 
+      productsCount, 
+      bookingsCount, 
+      tablesCount, 
+      usersCount,
+      roomsCount,
+      roomBookingsCount
+    ] = await Promise.all([
       Order.countDocuments(),
       Product.countDocuments(),
       Booking.countDocuments(),
       Table.countDocuments(),
-      User.countDocuments()
+      User.countDocuments(),
+      Room.countDocuments(),
+      RoomBooking.countDocuments()
     ]);
 
     // Calculate total revenue from 'paid' status orders
@@ -31,6 +43,8 @@ export async function GET() {
         bookings: bookingsCount,
         tables: tablesCount,
         users: usersCount,
+        rooms: roomsCount,
+        roomBookings: roomBookingsCount,
         revenue: totalRevenue
       }
     });
