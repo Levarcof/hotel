@@ -133,17 +133,17 @@ export default function OrderDetailsPage() {
     <div className="min-h-screen bg-[#F8F9FA] dark:bg-black text-zinc-900 dark:text-zinc-100 font-sans selection:bg-amber-100 pb-32">
       <Navbar />
 
-      <main className="max-w-5xl mx-auto pt-24 md:pt-32 px-4 md:px-8 relative z-10">
+      <main className="max-w-5xl mx-auto pt-4 md:pt-6 px-4 md:px-8 relative z-10">
         
         {/* Ambient Display Glow */}
         <div className="absolute top-0 right-10 w-96 h-96 bg-amber-500/10 dark:bg-amber-500/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-        <div className="mb-8">
+        <div className="mb-4">
           <OrderHeader order={order} />
         </div>
 
         {order.status !== "Cancelled" && order.products.length > 0 && (
-          <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-[2rem] p-8 md:p-10 border border-zinc-100 dark:border-zinc-800 shadow-sm mb-8 relative overflow-hidden">
+          <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-[2rem] p-8 md:p-10 border border-zinc-100 dark:border-zinc-800 shadow-sm mb-4 relative overflow-hidden">
              
              {/* Progress Trackers Container */}
              <div className="relative mx-auto max-w-3xl pt-2">

@@ -10,10 +10,13 @@ import {
   Menu, 
   X, 
   ChevronRight,
-  LogOut,
   Hotel,
   Utensils,
-  Settings
+  Settings,
+  Calendar,
+  Grid,
+  Users,
+  LogOut
 } from "lucide-react";
 
 export default function AdminSidebar({ children }) {
@@ -26,10 +29,13 @@ export default function AdminSidebar({ children }) {
   }, [pathname]);
 
   const navItems = [
+    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, href: "/admin" },
+    { id: "bookings", label: "Bookings", icon: Calendar, href: "/admin/bookings" },
+    { id: "tables", label: "Tables", icon: Grid, href: "/admin/tables" },
     { id: "orders", label: "Orders", icon: Package, href: "/admin/orders" },
     { id: "products", label: "Products", icon: Utensils, href: "/admin/products" },
+    { id: "users", label: "Users", icon: Users, href: "/admin/users" },
     { id: "add-product", label: "Add Product", icon: PlusCircle, href: "/admin/add-product" },
-    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, href: "/admin" },
   ];
 
   return (

@@ -34,7 +34,7 @@ export default function OrderHeader({ order }) {
   const shortId = order._id.substring(order._id.length - 8).toUpperCase();
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white dark:bg-[#1C1C1E] border border-zinc-100 dark:border-zinc-800 p-6 md:p-8 rounded-[2rem] shadow-sm">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white dark:bg-[#1C1C1E] border border-zinc-100 dark:border-zinc-800 p-4 md:p-6 rounded-[2rem] shadow-sm">
       <div className="flex gap-4">
         <Link 
           href="/orders" 
@@ -43,19 +43,19 @@ export default function OrderHeader({ order }) {
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <div className="flex flex-col justify-center">
-          <h1 className="text-lg sm:text-xl md:text-2xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight flex flex-col sm:flex-row sm:items-baseline sm:gap-2">
-            Order <span className="text-amber-600">#{shortId}</span>
+          <h1 className="text-lg sm:text-xl md:text-2xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight flex gap-2 sm:flex-row sm:items-baseline sm:gap-2">
+           <span>Order</span> <span className="text-amber-600">#{shortId}</span>
           </h1>
           <p className="text-xs sm:text-sm font-medium text-zinc-500 mt-1">{formattedDate}</p>
         </div>
       </div>
       
-      <div className="flex sm:justify-end border-t sm:border-t-0 border-zinc-100 dark:border-zinc-800 pt-4 sm:pt-0">
-        <span className={`px-4 py-2 rounded-xl text-xs md:text-sm font-bold tracking-wide flex items-center border ${getStatusColor(order.status)}`}>
+      {/* <div className="flex sm:justify-end border-t sm:border-t-0 border-zinc-100 dark:border-zinc-800 pt-4 sm:pt-0">
+       <span className={`px-4 py-2 rounded-xl text-xs md:text-sm font-bold tracking-wide flex items-center border ${getStatusColor(order.status)}`}>
           {getStatusIcon(order.status)}
           {order.status}
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import {
   Menu, X, ShoppingCart, Home,
   Utensils, ClipboardList, Info,
-  User, LogOut, ChevronRight
+  User, LogOut, ChevronRight, Calendar, MapPin
 } from "lucide-react";
 
 // --- Sub-Components ---
@@ -91,7 +91,7 @@ const MobileSidebar = ({ isOpen, onClose, navLinks, token, isAdmin, handleLogout
           {token ? (
             <div>
               <h2 className="text-2xl font-black text-zinc-900 dark:text-white tracking-tight">Welcome back!</h2>
-              <Link href="/profile" onClick={onClose} className="text-sm font-bold text-amber-600 hover:text-amber-700 mt-1.5 inline-block">View Profile</Link>
+
             </div>
           ) : (
             <div>
@@ -246,8 +246,9 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/", icon: Home },
     { name: "Menu", href: "/food", icon: Utensils },
+    { name: "Tables", href: "/tables", icon: MapPin },
+    { name: "My Bookings", href: "/my-table-bookings", icon: Calendar },
     { name: "Orders", href: "/orders", icon: ClipboardList },
-    { name: "About", href: "/about", icon: Info },
   ];
 
   return (
@@ -308,9 +309,7 @@ export default function Navbar() {
 
               {token ? (
                 <div className="flex items-center space-x-4">
-                  <Link href="/profile" className="flex items-center gap-2 text-sm font-bold text-zinc-700 dark:text-zinc-200 hover:text-amber-600 transition-colors">
-                    <User className="w-4 h-4" /> Profile
-                  </Link>
+
                   <button
                     onClick={handleLogout}
                     className="px-5 py-2 text-sm font-bold text-zinc-500 hover:text-red-500 bg-zinc-50 dark:bg-zinc-900 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-full transition-all"
