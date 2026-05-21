@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏨 GrandStay - Full-Stack Hotel & Hospitality Management System
 
-## Getting Started
+A premium, production-ready hospitality platform built with **Next.js 14 (App Router)**, **MongoDB**, and **Tailwind CSS**. This application bridges the gap between customer-facing hospitality experiences and robust internal business administration. 
 
-First, run the development server:
+It features an elegant client storefront for room/table bookings and food ordering, seamlessly integrated with a high-fidelity **Admin Dashboard** for complete business analytics, real-time inventory management, and revenue tracking.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔥 Key Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 👤 Customer-Facing Portal
+*   **Dynamic Food Menu & Ordering:** Browse active culinary menus with instant item customization and direct cart-to-order pipelines.
+*   **Smart Room Booking:** Real-time checking of room categories, pricing tiers, and dynamic availability slots.
+*   **Interactive Table Reservation:** Seamless table booking engine preventing double-reservations.
+*   **Intuitive UI/UX:** Designed with a responsive, modern glassmorphic look optimized for mobile, tablet, and desktop views.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 👑 Enterprise Admin Dashboard (Owner-Only Access)
+*   **Unified Business Analytics:** Live tracking of **Total Revenue**, **Sales Volume**, and category-specific financial insights.
+*   **Inventory Control Center:** Full CRUD operations to dynamically add, edit, or remove rooms, dining tables, and food menu items.
+*   **Live Order & Fulfillment Engine:** Real-time state management for updating food preparation states (e.g., Pending, Cooking, Delivered).
+*   **Financial & Booking Ledgers:** Centralized visibility over payment verification logs, comprehensive room check-in schedules, and table reservation timelines.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Architecture & Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Layer | Technology | Key Responsibility |
+| :--- | :--- | :--- |
+| **Framework** | **Next.js 14** (App Router) | Server-Side Rendering (SSR), API Routing, and optimized asset delivery. |
+| **Database** | **MongoDB** + **Prisma / Mongoose** | Storing complex relational documents (Users ↔ Bookings ↔ Orders). |
+| **Styling** | **Tailwind CSS** | Crafting a cohesive, responsive premium aesthetic across dashboards. |
+| **State Management**| React Context / Hooks | Preserving smooth user actions, shopping carts, and UI context. |
+| **Security** | Role-Based Authorization | Strict middleware locking admin endpoints exclusive to the owner. |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🚀 Installation & Local Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Prerequisites
+*   Node.js v18.x or higher
+*   MongoDB database instance (Local or MongoDB Atlas cluster)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Step-by-Step Deployment
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/levarcof/hotel.git](https://github.com/levarcof/hotel.git)
+   cd hotel
